@@ -105,9 +105,19 @@
         </div>
 
         <script>
-            $('.bb .d2:nth-child(2)').css('background-color', "yellow");
-            $('bb.d3').css('background-color', "red");
-            $('.section2').append('<div class="bb d5"></div>').css('background-color', 'green');
+            // This can be accomplished by using $('.bb.d2'), however
+            // this solution depends on a custom class name and assumes the items are
+            // in a set order, and that the children are a specific element type.
+            // In my solution, it's guarnateed that the second item will be yellow,
+            // and makes no assumptions about element type or classes. Admitedly,
+            // building in this flexibility is "expensive" since it uses the
+            // universal selector.
+            $('.sec > *:nth-child(2)').css('background-color', "yellow");
+            // See above, same applies for second requirement
+            $('.section2 > *:nth-child(3)').css('background-color', "red");
+            // The css() method needs to be called on a jQuery object. As it was
+            // before, the css() method was being called on $('.section2').
+            $('.section2').append($('<div class="bb d5"></div>').css('background-color', 'green'));
         </script>
 
 
