@@ -128,14 +128,32 @@
             Question 3
         -->
         <style>
-            .item {
-                padding: 3px 5px;
-                border: 1px solid gray;
-                border-radius: 5px;
-                display: inline;
+            .itemList .item {
+              /* Set box-sizing to border-box to include padding and border in
+              the element's total width and height */
+              box-sizing: border-box;
+              /* Set the desired width and height; */
+              width: 40px;
+              height: 40px;
+              border: 1px solid gray;
+              border-radius: 5px;
+              display: inline-block;
+              /* Center text */
+              text-align: center;
             }
-            .item:not(:last-child) {
+
+            .itemList .item:not(:last-child) {
                 margin-bottom: 5px;
+            }
+            /* Get the first and 3rd items, then style using the border shorthand property */
+            .itemList .item:nth-child(1),
+            .itemList .item:nth-child(3) {
+                border: 1px dashed blue;
+            }
+            /* Get the 2nd item and style */
+            .itemList .item:nth-child(2) {
+                color: red;
+                background-color: yellow;
             }
         </style>
 
@@ -155,7 +173,8 @@
                 3) Change the text color to red and the background to yellow in the second div.
                 4) Explain your changes.
         </pre>
-        <div>
+        <!-- Isolate the list by placing a class on the root el -->
+        <div class="itemList">
             <div class="item">Item 1</div>
             <div class="item">Item 2</div>
             <div class="item">Item 3</div>
@@ -164,7 +183,18 @@
         </div>
 
         <script>
-        	// Add jQuery here
+          // Get the first element with the class .item in the .itemList
+        	const firstDiv = $('.itemList .item:first-of-type').text();
+          console.log(firstDiv);
+          // Get the last element with the class .item in the .itemList
+          const lastDiv = $('.itemList .item:last-of-type').text();
+          console.log(lastDiv);
+          // Get the length of the list, devide it in half, then round up.
+          // This will find the middle el in an odd numbered .itemList.
+          // If the .itemList is even mumbered, this will get the element as close
+          // to the middle, without going over, as possible.
+          const middleEl = Math.ceil($('.itemList .item').length/2);
+          console.log($(`.itemList .item:nth-child(${middleEl})`).text());
         </script>
 
 
