@@ -194,7 +194,7 @@
           // If the .itemList is even mumbered, this will get the element as close
           // to the middle, without going over, as possible.
           const middleEl = Math.ceil($('.itemList .item').length/2);
-          console.log($(`.itemList .item:nth-child(${middleEl})`).text());
+          console.log($(`.itemList .item:nth-child( ${middleEl} )`).text());
         </script>
 
 
@@ -217,6 +217,103 @@
                 4) The script may use jQuery or raw Javascript.
                 5) Explain your CSS and Javascript.
         </pre>
+
+        <style>
+          .rollDieButton,
+          .rollDieResult {
+            font-size: 20px;
+          }
+
+          .rollDieButton {
+            background-color: grey;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+          }
+
+          .rollDieResult {
+            margin-left: 30px;
+          }
+
+          .die {
+            position: relative;
+            top: 200px;
+          }
+
+          .dieRightFace,
+          .dieLeftFace,
+          .dieTopFace div {
+            padding: 10px;
+            width: 180px;
+            height: 180px;
+          }
+
+          .dieRightFace,
+          .dieLeftFace,
+          .dieTopFace {
+            position: absolute;
+            border: 1px white solid;
+          }
+
+          .dieLeftFace {
+            -webkit-transform: skewY(30deg);
+            -moz-transform: skewY(30deg);
+            background-color: red;
+          }
+
+          .dieRightFace {
+            -webkit-transform: skewY(-30deg);
+            -moz-transform: skewY(-30deg);
+            background-color: red;
+            left: 200px;
+          }
+
+          .dieTopFace div {
+            -webkit-transform: skewY(-30deg) scaleY(1.16);
+            -moz-transform: skewY(-30deg) scaleY(1.16);
+            background-color: red;
+            font-size: 0.862em;
+          }
+
+          .dieTopFace {
+            -webkit-transform: rotate(60deg);
+            -moz-transform: rotate(60deg);
+            top: -158px;
+            left: 100px;
+          }
+        </style>
+
+        <button class="rollDieButton">Roll Die</button>
+        <span class="rollDieResult"></span>
+        <div class="die">
+          <div class="dieTopFace">
+            <div>
+              Number
+            </div>
+          </div>
+          <div class="dieLeftFace">
+            Number
+          </div>
+          <div class="dieRightFace">
+            Number
+          </div>
+        </div>
+
+        <script>
+          function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+
+          $('.rollDieButton').click(function() {
+            const rollDieResult = getRandomNumber(1,6);
+            $('.rollDieResult').text(rollDieResult);
+          });
+        </script>
 
 
 <!------------------------------------------------------------------------------------->
