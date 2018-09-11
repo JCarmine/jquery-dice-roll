@@ -248,9 +248,14 @@
           .dieRightFace,
           .dieLeftFace,
           .dieTopFace div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 10px;
             width: 180px;
             height: 180px;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
           }
 
           .dieRightFace,
@@ -277,7 +282,6 @@
             -webkit-transform: skewY(-30deg) scaleY(1.16);
             -moz-transform: skewY(-30deg) scaleY(1.16);
             background-color: red;
-            font-size: 0.862em;
           }
 
           .dieTopFace {
@@ -290,29 +294,28 @@
 
         <button class="rollDieButton">Roll Die</button>
         <span class="rollDieResult"></span>
-        <div class="die">
-          <div class="dieTopFace">
-            <div>
-              Number
-            </div>
-          </div>
-          <div class="dieLeftFace">
-            Number
-          </div>
-          <div class="dieRightFace">
-            Number
-          </div>
-        </div>
+        <div class="die"></div>
 
         <script>
+          $('.rollDieButton').click(function() {
+            const rollDieResult = getRandomNumber(1,6);
+            $('.rollDieResult').text(rollDieResult);
+            drawDie(rollDieResult);
+          });
+
           function getRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
 
-          $('.rollDieButton').click(function() {
-            const rollDieResult = getRandomNumber(1,6);
-            $('.rollDieResult').text(rollDieResult);
-          });
+          function drawDie(selectedInteger) {
+            console.log('running');
+            const $topFace = $(`<div class="dieTopFace"><div> ${selectedInteger} </div></div>`);
+            const $leftFace = $('<div class="dieLeftFace">Left Face</div>');
+            const $rightFace = $('<div class="dieRightFace">Right Face</div>');
+            $('.die').append($topFace);
+            $('.die').append($leftFace);
+            $('.die').append($rightFace);
+          }
         </script>
 
 
