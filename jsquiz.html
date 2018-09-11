@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/cdn-cgi/apps/head/AMpBadam-2NcDVeZ-p41cnXxZmc.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style>
+        </style>
+    </head>
+
+    <body>
+
+    	<h2>Javascript &amp; JQuery Quiz</h2>
+    	<p>Complete the following questions by modifying this document with your solutions,
+        then zip it, upload the zip file, and submit your assignment.
+    	</p><br><br>
+
+<!------------------------------------------------------------------------------------->
+
+
+        <!--
+            Question 1
+        -->
+        <h3>Question 1</h3>
+        <pre>
+            Fix the Javascript below so the <em>question1</em> div displays "123" in bold.
+            Explain what code you changed and why.
+        </pre>
+        <div class="question1" qId="123">Replace Me</div>
+        <script type="text/javascript">
+            // The data type stored in qId is a string
+            let qId = $('.question1').attr("qId");
+            switch (qId) {
+                case "abc":
+                    $('.question1').html("<b>abc</b>");
+                    break;
+                // The value to check against needs to be changed to a string
+                case "123":
+                    // According to the jQuery docs, .html() is used to
+                    // "set the HTML contents of every matched element"
+                    $('.question1').html("<b>123</b>");
+                    // breaks are required in a switch statement
+                    // otherwise the code will execute until it reaches the default
+                    break;
+                default:
+                    $('.question1').text("Unknown value");
+            }
+        </script>
+
+        <br><br><br>
+
+
+<!------------------------------------------------------------------------------------->
+
+        <!--
+            Question 2
+
+            Fix the Javascript below to display as follows:
+              Note: Don't edit the CSS above.
+              1) The second div in each line should be yellow.
+              2) The third div of the second line should be red.
+              3) Add a fifth div to the first line and color it green.
+        -->
+        <style>
+            .bb {
+                width: 20px;
+                height: 20px;
+                float: left;
+                border: 1px solid black;
+                background-color: gray;
+                border-radius: 4px;
+            }
+
+            .bb:not(:last-of-type) {
+                margin-right: 10px;
+            }
+
+            .sec:not(:last-child) {
+                margin-bottom: 10px;
+            }
+
+            .sec:after {
+                content: '';
+                display: block;
+                clear:both;
+            }
+        </style>
+
+        <h3>Question 2</h3>
+        <pre>
+            The following three requirements have been implemented incorrectly in the
+            Javascript below. Fix the script so the three requirements are met.
+              1) The second div in each line should be yellow.
+              2) The third div of the second line should be red.
+              3) Add a fifth div to the second line and color it green.
+        </pre>
+        <div class="sec section1">
+            <div class="bb d1"></div>
+            <div class="bb d2"></div>
+            <div class="bb d3"></div>
+        </div>
+        <div class="sec section2">
+            <div class="bb d1"></div>
+            <div class="bb d2"></div>
+            <div class="bb d3"></div>
+            <div class="bb d4"></div>
+        </div>
+
+        <script>
+            $('.bb .d2:nth-child(2)').css('background-color', "yellow");
+            $('bb.d3').css('background-color', "red");
+            $('.section2').append('<div class="bb d5"></div>').css('background-color', 'green');
+        </script>
+
+
+
+<!------------------------------------------------------------------------------------->
+
+        <!--
+            Question 3
+        -->
+        <style>
+            .item {
+                padding: 3px 5px;
+                border: 1px solid gray;
+                border-radius: 5px;
+                display: inline;
+            }
+            .item:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        </style>
+
+        <h3>Question 3</h3>
+        <pre>
+            For the Item divs below:
+
+            Using jQuery selectors:
+                1) Get the text of the first div, and log to console.
+                2) Get the text of the last div, and log to console.
+                3) Get the text of the middle div, keeping in mind more divs could be added. Log to console.
+
+            Using CSS:
+                1) Make the divs 40x40, including the border, and center the text.
+                   (NOTE: The 40x40 modification is the key part of the change.)
+                2) Display the first and third divs with a blue-dashed border.
+                3) Change the text color to red and the background to yellow in the second div.
+                4) Explain your changes.
+        </pre>
+        <div>
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+        </div>
+
+        <script>
+        	// Add jQuery here
+        </script>
+
+
+
+<!------------------------------------------------------------------------------------->
+
+
+        <!--
+            Question 4
+        -->
+        <h3>Question 4</h3>
+        <pre>
+            Write a program that displays the face of a six-sided die (one of a set of dice) when a button is pressed.
+
+            The requirements are as follows:
+                1) Press a button and generate a number between 1 and 6. Display the
+                   number next to the button.
+                2) The face of the die is to be drawn with divs, and should look like a standard 6-sided die.
+                3) Style with CSS.
+                4) The script may use jQuery or raw Javascript.
+                5) Explain your CSS and Javascript.
+        </pre>
+
+
+<!------------------------------------------------------------------------------------->
+
+    </body>
+</html>
