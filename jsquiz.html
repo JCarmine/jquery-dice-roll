@@ -57,7 +57,7 @@
               Note: Don't edit the CSS above.
               1) The second div in each line should be yellow.
               2) The third div of the second line should be red.
-              3) Add a fifth div to the first line and color it green.
+              3) Add a fifth div to the second line and color it green.
         -->
         <style>
             .bb {
@@ -191,10 +191,11 @@
           console.log(lastDiv);
           // Get the length of the list, devide it in half, then round up.
           // This will find the middle el in an odd numbered .itemList.
-          // If the .itemList is even mumbered, this will get the element as close
+          // If the .itemList is even numbered, this will get the element as close
           // to the middle, without going over, as possible.
-          const middleEl = Math.ceil($('.itemList .item').length/2);
-          console.log($(`.itemList .item:nth-child( ${middleEl} )`).text());
+          const middleOfList = Math.ceil($('.itemList .item').length/2);
+          const middleElement = $(`.itemList .item:nth-child( ${middleOfList} )`).text()
+          console.log(middleElement);
         </script>
 
 
@@ -241,6 +242,8 @@
           }
 
           .die {
+            /* Set position to relative so that children can be absolutely
+            positioned to it */
             position: relative;
             top: 200px;
           }
@@ -248,14 +251,17 @@
           .dieRightFace,
           .dieLeftFace,
           .dieTopFace div {
+            /* Setting display to flex here allows us to easily center the
+            text horizontally and vertically */
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
             padding: 10px;
             width: 180px;
             height: 180px;
-            font-family: Arial, sans-serif;
-            font-size: 30px;
+            background-color: red;
           }
 
           .dieRightFace,
@@ -264,51 +270,64 @@
             position: absolute;
             border: 1px white solid;
           }
-
+          /* Skew on y-axis to create parallelogram */
           .dieLeftFace {
             -webkit-transform: skewY(30deg);
             -moz-transform: skewY(30deg);
-            background-color: red;
+            transform: skewY(30deg);
           }
-
+          /* Skew on y-axis to create parallelogram, position 200px from
+          left border of parent container */
           .dieRightFace {
             -webkit-transform: skewY(-30deg);
             -moz-transform: skewY(-30deg);
-            background-color: red;
+            transform: skewY(-30deg);
             left: 200px;
           }
-
-          .dieTopFace div {
-            -webkit-transform: skewY(-30deg) scaleY(1.16);
-            -moz-transform: skewY(-30deg) scaleY(1.16);
-            background-color: red;
-          }
-
+          /* Rotate div, position element relative to parent container */
           .dieTopFace {
             -webkit-transform: rotate(60deg);
             -moz-transform: rotate(60deg);
+            transform: rotate(60deg);
             top: -158px;
             left: 100px;
           }
+          /* Skew on y-axis, increase scale to set flush with other components. */
+          .dieTopFace div {
+            -webkit-transform: skewY(-30deg) scaleY(1.16);
+            -moz-transform: skewY(-30deg) scaleY(1.16);
+            transform: skewY(-30deg) scaleY(1.16);
+          }
         </style>
 
-        <button class="rollDieButton">Roll Die</button>
-        <span class="rollDieResult"></span>
-        <div class="die"></div>
+        <div class="dieExample">
+          <button class="rollDieButton">Roll Die</button>
+          <span class="rollDieResult"></span>
+          <div class="die"></div>
+        </div>
 
         <script>
+          // Bind click handler to button, call the getRandomNumber() function
+          // with min and max numbers.
+          // Display result in .rollDieResult el.
+          // The call drawDie() with result.
           $('.rollDieButton').click(function() {
             const rollDieResult = getRandomNumber(1,6);
             $('.rollDieResult').text(rollDieResult);
             drawDie(rollDieResult);
           });
 
+          // Call Math.random() which returns a number between 0 and 1
+          // Perform operation to ensure that the "max" number can be included in Results
+          // Finally call Math.floor() to round down to nearest integer
           function getRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
 
+          // Create jQuery objects for each element we want to create.
+          // Since the selected number is available, we can display it on the top face.
+          // Finally append all of the els to the parent.
           function drawDie(selectedInteger) {
-            console.log('running');
             const $topFace = $(`<div class="dieTopFace"><div> ${selectedInteger} </div></div>`);
             const $leftFace = $('<div class="dieLeftFace">Left Face</div>');
             const $rightFace = $('<div class="dieRightFace">Right Face</div>');
