@@ -248,7 +248,7 @@
 
           .dieRightFace,
           .dieLeftFace,
-          .dieTopFace div {
+          .dieTopFace > div {
             /* Setting display to flex here allows us to easily center the
             text horizontally and vertically */
             display: flex;
@@ -291,7 +291,7 @@
             left: 100px;
           }
           /* Skew on y-axis, increase scale to set flush with other components. */
-          .dieTopFace div {
+          .dieTopFace > div {
             -webkit-transform: skewY(-30deg) scaleY(1.16);
             -moz-transform: skewY(-30deg) scaleY(1.16);
             transform: skewY(-30deg) scaleY(1.16);
@@ -301,11 +301,7 @@
         <div class="dieExample">
           <button class="rollDieButton">Roll Die</button>
           <span class="rollDieResult"></span>
-          <div class="die">
-            <div class="dieTopFace"></div>
-            <div class="dieLeftFace"></div>
-            <div class="dieRightFace"></div>
-          </div>
+          <div class="die"></div>
         </div>
 
         <script>
@@ -326,26 +322,27 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
 
-          function faceGenerator(quantity) {
-            var $face = $('<div></div>');
+          function faceGenerator(quantity, face) {
+            var $face = $(`<div class="die${face}Face"></div>`);
+            var $innerWrap = $('<div class="pipContainer"></div>');
             for (var index = 0; index < quantity; index++) {
-              $bug.append('<div class="pip">pip</div>')
+              $innerWrap.append('<div class="pip">pip</div>')
             }
-            return $bug;
+            $face.append($innerWrap);
+            return $face;
           }
 
           // Create jQuery objects for each element we want to create.
           // Since the selected number is available, we can display it on the top face.
           // Finally append all of the els to the parent.
           function drawDie(pips) {
-            const $topFace = faceGenerator(pips);
-            const $leftFace = faceGenerator(pips);
-            // const $leftFace = $('<div class="dieLeftFace">Left Face</div>');
-            // const $rightFace = $('<div class="dieRightFace">Right Face</div>');
-            $('.dieTopFace').append($topFace);
-            $('.dieLeftFace').append($leftFace);
-            // $('.die').append($leftFace);
-            // $('.die').append($rightFace);
+            const $topFace = faceGenerator(pips, "Top");
+            const $leftFace = faceGenerator(pips, "Left");
+            const $rightFace = faceGenerator(pips, "Right");
+
+            $('.die').append($topFace);
+            $('.die').append($leftFace);
+            $('.die').append($rightFace);
           }
         </script>
 
