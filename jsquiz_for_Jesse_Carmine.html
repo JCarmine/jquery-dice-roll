@@ -252,8 +252,6 @@
             /* Setting display to flex here allows us to easily center the
             text horizontally and vertically */
             display: flex;
-            align-items: center;
-            justify-content: center;
             font-family: Arial, sans-serif;
             font-size: 30px;
             padding: 10px;
@@ -296,6 +294,80 @@
             -moz-transform: skewY(-30deg) scaleY(1.16);
             transform: skewY(-30deg) scaleY(1.16);
           }
+
+          .face-1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .face-2 {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .face-2 .pip:nth-of-type(2) {
+            align-self: flex-end;
+          }
+
+          .face-3 {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .face-3 .pip:nth-of-type(2) {
+            align-self: center;
+          }
+
+          .face-3 .pip:nth-of-type(3) {
+            align-self: flex-end;
+          }
+
+          .face-4,
+          .face-6 {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .face-4 .column,
+          .face-6 .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          .face-5 {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .face-5 .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          .face-5 .column:nth-of-type(2) {
+            justify-content: center;
+          }
+
+          [class$="face"] {
+            margin: 16px;
+            padding: 4px;
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 10%;
+          }
+
+          .pip {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin: 4px;
+            background-color: white;
+          }
         </style>
 
         <div class="dieExample">
@@ -324,9 +396,9 @@
 
           function faceGenerator(quantity, face) {
             var $face = $(`<div class="die${face}Face"></div>`);
-            var $pipContainer = $('<div class="pipContainer"></div>');
+            var $pipContainer = $(`<div class="face-${quantity}"></div>`);
             for (var index = 0; index < quantity; index++) {
-              $pipContainer.append('<div class="pip">pip</div>')
+              $pipContainer.append('<div class="pip"></div>')
             }
             $face.append($pipContainer);
             return $face;
@@ -381,6 +453,7 @@
           }
 
           function drawDie(top,left,right) {
+            $('.die').empty();
             $('.die').append(top);
             $('.die').append(left);
             $('.die').append(right);
