@@ -312,7 +312,7 @@
           $('.rollDieButton').click(function() {
             const rollDieResult = getRandomNumber(1,6);
             $('.rollDieResult').text(rollDieResult);
-            drawDie(rollDieResult);
+            configureDie(rollDieResult);
           });
 
           // Call Math.random() which returns a number between 0 and 1
@@ -324,25 +324,66 @@
 
           function faceGenerator(quantity, face) {
             var $face = $(`<div class="die${face}Face"></div>`);
-            var $innerWrap = $('<div class="pipContainer"></div>');
+            var $pipContainer = $('<div class="pipContainer"></div>');
             for (var index = 0; index < quantity; index++) {
-              $innerWrap.append('<div class="pip">pip</div>')
+              $pipContainer.append('<div class="pip">pip</div>')
             }
-            $face.append($innerWrap);
+            $face.append($pipContainer);
             return $face;
           }
 
           // Create jQuery objects for each element we want to create.
           // Since the selected number is available, we can display it on the top face.
           // Finally append all of the els to the parent.
-          function drawDie(pips) {
-            const $topFace = faceGenerator(pips, "Top");
-            const $leftFace = faceGenerator(pips, "Left");
-            const $rightFace = faceGenerator(pips, "Right");
+          function configureDie(pips) {
+            let $topFace;
+            let $leftFace;
+            let $rightFace;
 
-            $('.die').append($topFace);
-            $('.die').append($leftFace);
-            $('.die').append($rightFace);
+            switch (pips) {
+              case 1:
+                $topFace = faceGenerator(pips, "Top");
+                $leftFace = faceGenerator(5, "Left");
+                $rightFace = faceGenerator(4, "Right");
+                drawDie($topFace,$leftFace,$rightFace);
+                break;
+              case 2:
+                $topFace = faceGenerator(pips, "Top");
+                $leftFace = faceGenerator(1, "Left");
+                $rightFace = faceGenerator(4, "Right");
+                drawDie($topFace,$leftFace,$rightFace);
+                break;
+              case 3:
+                $topFace = faceGenerator(pips, "Top");
+                $leftFace = faceGenerator(5, "Left");
+                $rightFace = faceGenerator(1, "Right");
+                drawDie($topFace,$leftFace,$rightFace);
+                break;
+              case 4:
+                $topFace = faceGenerator(pips, "Top");
+                $leftFace = faceGenerator(1, "Left");
+                $rightFace = faceGenerator(5, "Right");
+                drawDie($topFace,$leftFace,$rightFace);
+                break;
+              case 5:
+                $topFace = faceGenerator(pips, "Top");
+                $leftFace = faceGenerator(4, "Left");
+                $rightFace = faceGenerator(1, "Right");
+                drawDie($topFace,$leftFace,$rightFace);
+                break;
+              case 6:
+                $topFace = faceGenerator(pips, "Top");
+                $leftFace = faceGenerator(4, "Left");
+                $rightFace = faceGenerator(5, "Right");
+                drawDie($topFace,$leftFace,$rightFace);
+                break;
+            }
+          }
+
+          function drawDie(top,left,right) {
+            $('.die').append(top);
+            $('.die').append(left);
+            $('.die').append(right);
           }
         </script>
 
