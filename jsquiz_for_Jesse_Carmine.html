@@ -393,52 +393,53 @@
           }
 
           function faceGenerator(quantity, face) {
-            var $face = $(`<div class="die${face}Face"></div>`);
-            var $pipContainer = $(`<div class="face-${quantity}"></div>`);
-            var $column1 = $('<div class="column column1"></div>');
-            var $column2 = $('<div class="column column2"></div>');
-            var $column3 = $('<div class="column column3"></div>');
-            var pip = '<span class="pip"></span>';
+            const $face = $(`<div class="die${face}Face"></div>`);
+            const $pipContainer = $(`<div class="face-${quantity}"></div>`);
+            const $column1 = $('<div class="column column1"></div>');
+            const $column2 = $('<div class="column column2"></div>');
+            const $column3 = $('<div class="column column3"></div>');
+            const pip = '<span class="pip"></span>';
 
-            if (quantity === 4) {
-              for (var index = 0; index < quantity/2; index++) {
-                $column1.append(pip);
-                $column2.append(pip);
-              }
-              $pipContainer.append($column1);
-              $pipContainer.append($column2);
-            } else if (quantity === 5) {
-              for (var index = 0; index < 2; index++) {
-                $column1.append(pip);
-              }
-              for (var index = 0; index < 1; index++) {
-                $column2.append(pip);
-              }
-              for (var index = 0; index < 2; index++) {
-                $column3.append(pip);
-              }
-              $pipContainer.append($column1);
-              $pipContainer.append($column2);
-              $pipContainer.append($column3);
-            } else if (quantity === 6) {
-              for (var index = 0; index < (quantity/2); index++) {
-                $column1.append(pip);
-                $column2.append(pip);
-              }
-              $pipContainer.append($column1);
-              $pipContainer.append($column2);
-            } else {
-              for (var index = 0; index < quantity; index++) {
-                $pipContainer.append(pip)
-              }
+            switch (quantity) {
+              case 4:
+                for (let index = 0; index < quantity/2; index++) {
+                  $column1.append(pip);
+                  $column2.append(pip);
+                }
+                $pipContainer.append($column1);
+                $pipContainer.append($column2);
+                break;
+              case 5:
+                for (let index = 0; index < 2; index++) {
+                  $column1.append(pip);
+                }
+                for (let index = 0; index < 1; index++) {
+                  $column2.append(pip);
+                }
+                for (let index = 0; index < 2; index++) {
+                  $column3.append(pip);
+                }
+                $pipContainer.append($column1);
+                $pipContainer.append($column2);
+                $pipContainer.append($column3);
+                break;
+              case 6:
+                for (let index = 0; index < (quantity/2); index++) {
+                  $column1.append(pip);
+                  $column2.append(pip);
+                }
+                $pipContainer.append($column1);
+                $pipContainer.append($column2);
+                break;
+              default:
+                for (let index = 0; index < quantity; index++) {
+                  $pipContainer.append(pip)
+                }
             }
             $face.append($pipContainer);
             return $face;
           }
 
-          // Create jQuery objects for each element we want to create.
-          // Since the selected number is available, we can display it on the top face.
-          // Finally append all of the els to the parent.
           function configureDie(pips) {
             let $topFace;
             let $leftFace;
@@ -481,9 +482,9 @@
 
           function drawDie(top,left,right) {
             $('.die').empty();
-            $('.die').append(top);
-            $('.die').append(left);
-            $('.die').append(right);
+            $('.die').append(top)
+                     .append(left)
+                     .append(right);
           }
         </script>
 
