@@ -301,11 +301,7 @@
         <div class="dieExample">
           <button class="rollDieButton">Roll Die</button>
           <span class="rollDieResult"></span>
-          <div class="die">
-            <div class="dieTopFace"></div>
-            <div class="dieLeftFace"></div>
-            <div class="dieRightFace"></div>
-          </div>
+          <div class="die"></div>
         </div>
 
         <script>
@@ -326,26 +322,16 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
 
-          function faceGenerator(quantity) {
-            var $face = $('<div></div>');
-            for (var index = 0; index < quantity; index++) {
-              $bug.append('<div class="pip">pip</div>')
-            }
-            return $bug;
-          }
-
           // Create jQuery objects for each element we want to create.
           // Since the selected number is available, we can display it on the top face.
           // Finally append all of the els to the parent.
-          function drawDie(pips) {
-            const $topFace = faceGenerator(pips);
-            const $leftFace = faceGenerator(pips);
-            // const $leftFace = $('<div class="dieLeftFace">Left Face</div>');
-            // const $rightFace = $('<div class="dieRightFace">Right Face</div>');
-            $('.dieTopFace').append($topFace);
-            $('.dieLeftFace').append($leftFace);
-            // $('.die').append($leftFace);
-            // $('.die').append($rightFace);
+          function drawDie(selectedInteger) {
+            const $topFace = $(`<div class="dieTopFace"><div> ${selectedInteger} </div></div>`);
+            const $leftFace = $('<div class="dieLeftFace">Left Face</div>');
+            const $rightFace = $('<div class="dieRightFace">Right Face</div>');
+            $('.die').append($topFace);
+            $('.die').append($leftFace);
+            $('.die').append($rightFace);
           }
         </script>
 
