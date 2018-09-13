@@ -382,7 +382,7 @@
           $('.rollDieButton').click(function() {
             const rollDieResult = getRandomNumber(1,6);
             $('.rollDieResult').text(rollDieResult);
-            configureDie(rollDieResult);
+            configureDie(4);
           });
 
           // Call Math.random() which returns a number between 0 and 1
@@ -395,10 +395,26 @@
           function faceGenerator(quantity, face) {
             var $face = $(`<div class="die${face}Face"></div>`);
             var $pipContainer = $(`<div class="face-${quantity}"></div>`);
-            for (var index = 0; index < quantity; index++) {
-              $pipContainer.append('<div class="pip"></div>')
+            var $column1 = $('<div class="column"></div>');
+            var $column2 = $('<div class="column"></div>');
+            var pip = '<div class="pip"></div>';
+
+            if (quantity === 4) {
+              for (var index = 0; index < (quantity/2); index++) {
+                $column1.append('<div class="pip"></div>');
+                $column2.append('<div class="pip"></div>');
+
+                // for (var index = 0; index < quantity; index++) {
+                //   $column.append(pip);
+                // }
+              }
+
             }
-            $face.append($pipContainer);
+            // for (var index = 0; index < quantity; index++) {
+            //   $pipContainer.append('<div class="pip"></div>')
+            // }
+            $face.append($column1);
+            $face.append($column2);
             return $face;
           }
 
