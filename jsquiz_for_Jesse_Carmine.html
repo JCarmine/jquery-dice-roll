@@ -222,7 +222,6 @@
           .rollDieResult {
             font-size: 20px;
           }
-
           .rollDieButton {
             background-color: grey;
             border: none;
@@ -234,7 +233,6 @@
             margin: 4px 2px;
             cursor: pointer;
           }
-
           .rollDieResult {
             margin-left: 30px;
           }
@@ -245,7 +243,6 @@
             position: relative;
             top: 200px;
           }
-
           .dieRightFace,
           .dieLeftFace,
           .dieTopFace > div {
@@ -259,7 +256,6 @@
             height: 180px;
             background-color: red;
           }
-
           .dieRightFace,
           .dieLeftFace,
           .dieTopFace {
@@ -295,62 +291,7 @@
             transform: skewY(-30deg) scaleY(1.16);
           }
 
-          .face-1 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .face-2 {
-            display: flex;
-            justify-content: space-between;
-          }
-
-          .face-2 .pip:nth-of-type(2) {
-            align-self: flex-end;
-          }
-
-          .face-3 {
-            display: flex;
-            justify-content: space-between;
-          }
-
-          .face-3 .pip:nth-of-type(2) {
-            align-self: center;
-          }
-
-          .face-3 .pip:nth-of-type(3) {
-            align-self: flex-end;
-          }
-
-          .face-4,
-          .face-6 {
-            display: flex;
-            justify-content: space-between;
-          }
-
-          .face-4 .column,
-          .face-6 .column {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-          }
-
-          .face-5 {
-            display: flex;
-            justify-content: space-between;
-          }
-
-          .face-5 .column {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-          }
-
-          .face-5 .column:nth-of-type(2) {
-            justify-content: center;
-          }
-
+          /* Set global styles for .face-# */
           [class^="face"] {
             padding: 4px;
             width: 180px;
@@ -358,6 +299,62 @@
             object-fit: contain;
           }
 
+          /* Set styles for faces with 1 pip */
+          .face-1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          /* Set styles for faces with 2 pips */
+          .face-2 {
+            display: flex;
+            justify-content: space-between;
+          }
+          .face-2 .pip:nth-of-type(2) {
+            align-self: flex-end;
+          }
+
+          /* Set styles for faces with 3 pips */
+          .face-3 {
+            display: flex;
+            justify-content: space-between;
+          }
+          .face-3 .pip:nth-of-type(2) {
+            align-self: center;
+          }
+          .face-3 .pip:nth-of-type(3) {
+            align-self: flex-end;
+          }
+
+          /* Set styles for faces with 4 and 6 pips */
+          .face-4,
+          .face-6 {
+            display: flex;
+            justify-content: space-between;
+          }
+          .face-4 .column,
+          .face-6 .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          /* Set styles for faces with 5 pips */
+          .face-5 {
+            display: flex;
+            justify-content: space-between;
+          }
+          .face-5 .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          .face-5 .column:nth-of-type(2) {
+            justify-content: center;
+          }
+
+          /* Style the pip */
           .pip {
             display: block;
             width: 24px;
@@ -392,54 +389,13 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
 
-          function faceGenerator(quantity, face) {
-            const $face = $(`<div class="die${face}Face"></div>`);
-            const $pipContainer = $(`<div class="face-${quantity}"></div>`);
-            const $column1 = $('<div class="column column1"></div>');
-            const $column2 = $('<div class="column column2"></div>');
-            const $column3 = $('<div class="column column3"></div>');
-            const pip = '<span class="pip"></span>';
-
-            switch (quantity) {
-              case 4:
-                for (let index = 0; index < quantity/2; index++) {
-                  $column1.append(pip);
-                  $column2.append(pip);
-                }
-                $pipContainer.append($column1);
-                $pipContainer.append($column2);
-                break;
-              case 5:
-                for (let index = 0; index < 2; index++) {
-                  $column1.append(pip);
-                }
-                for (let index = 0; index < 1; index++) {
-                  $column2.append(pip);
-                }
-                for (let index = 0; index < 2; index++) {
-                  $column3.append(pip);
-                }
-                $pipContainer.append($column1);
-                $pipContainer.append($column2);
-                $pipContainer.append($column3);
-                break;
-              case 6:
-                for (let index = 0; index < (quantity/2); index++) {
-                  $column1.append(pip);
-                  $column2.append(pip);
-                }
-                $pipContainer.append($column1);
-                $pipContainer.append($column2);
-                break;
-              default:
-                for (let index = 0; index < quantity; index++) {
-                  $pipContainer.append(pip)
-                }
-            }
-            $face.append($pipContainer);
-            return $face;
-          }
-
+          // Based on the result of the roll, call the faceGenerator() with
+          // the number of pips and the face. In the end, call drawDie() to
+          // draw the die.
+          // ToDo: The values for the left and right faces are hardcoded based
+          // on a real die. Much more work will be needed to make these dynamic,
+          // and ensure that duplicate numbers, or numbers that would occure
+          // on the down facing side of the die aren't displayed.
           function configureDie(pips) {
             let $topFace;
             let $leftFace;
@@ -480,11 +436,58 @@
             drawDie($topFace,$leftFace,$rightFace);
           }
 
+          // Create all of the necessary elements and store them as variables.
+          // Based on the roll's value, loop as appropriate to generate the
+          // correct number of columns and pips for each face.
+          function faceGenerator(quantity, face) {
+            const $face = $(`<div class="die${face}Face"></div>`);
+            const $pipContainer = $(`<div class="face-${quantity}"></div>`);
+            const $column1 = $('<div class="column column1"></div>');
+            const $column2 = $('<div class="column column2"></div>');
+            const $column3 = $('<div class="column column3"></div>');
+            const pip = '<span class="pip"></span>';
+
+            switch (quantity) {
+              case 4:
+                for (let index = 0; index < quantity/2; index++) {
+                  $column1.append(pip);
+                  $column2.append(pip);
+                }
+                $pipContainer.append($column1).append($column2);
+                break;
+              case 5:
+                for (let index = 0; index < 2; index++) {
+                  $column1.append(pip);
+                }
+                for (let index = 0; index < 1; index++) {
+                  $column2.append(pip);
+                }
+                for (let index = 0; index < 2; index++) {
+                  $column3.append(pip);
+                }
+                $pipContainer.append($column1).append($column2).append($column3);
+                break;
+              case 6:
+                for (let index = 0; index < (quantity/2); index++) {
+                  $column1.append(pip);
+                  $column2.append(pip);
+                }
+                $pipContainer.append($column1).append($column2);
+                break;
+              default:
+                for (let index = 0; index < quantity; index++) {
+                  $pipContainer.append(pip);
+                }
+            }
+            $face.append($pipContainer);
+            return $face;
+          }
+
+          // Empty the root element to clear previous rolls.
+          // Append all 3 faces to the root element.
           function drawDie(top,left,right) {
             $('.die').empty();
-            $('.die').append(top)
-                     .append(left)
-                     .append(right);
+            $('.die').append(top).append(left).append(right);
           }
         </script>
 
