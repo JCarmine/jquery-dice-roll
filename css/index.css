@@ -1,0 +1,177 @@
+body,
+pre {
+  font-family: sans-serif;
+}
+
+.rollDieButton,
+.rollDieResult {
+  font-size: 20px;
+}
+
+.rollDieButton {
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.rollDieResult {
+  margin-left: 30px;
+}
+
+.die {
+  /* Set position to relative so that children can be absolutely
+        positioned to it */
+  position: relative;
+  top: 200px;
+}
+
+.dieRightFace,
+.dieLeftFace,
+.dieTopFace>div {
+  /* Setting display to flex here allows us to easily center the
+        text horizontally and vertically */
+  display: flex;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  padding: 10px;
+  width: 180px;
+  height: 180px;
+  background-color: red;
+}
+
+.dieRightFace,
+.dieLeftFace,
+.dieTopFace {
+  position: absolute;
+  border: 1px white solid;
+}
+
+/* Skew on y-axis to create parallelogram */
+
+.dieLeftFace {
+  -webkit-transform: skewY(30deg);
+  -moz-transform: skewY(30deg);
+  transform: skewY(30deg);
+  background-color: #eb0000;
+}
+
+/* Skew on y-axis to create parallelogram, position 200px from
+      left border of parent container */
+
+.dieRightFace {
+  -webkit-transform: skewY(-30deg);
+  -moz-transform: skewY(-30deg);
+  transform: skewY(-30deg);
+  left: 200px;
+  background-color: #d70000;
+}
+
+/* Rotate div, position element relative to parent container */
+
+.dieTopFace {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  transform: rotate(60deg);
+  top: -158px;
+  left: 100px;
+}
+
+/* Skew on y-axis, increase scale to set flush with other components. */
+
+.dieTopFace>div {
+  -webkit-transform: skewY(-30deg) scaleY(1.16);
+  -moz-transform: skewY(-30deg) scaleY(1.16);
+  transform: skewY(-30deg) scaleY(1.16);
+}
+
+/* Set global styles for .face-# */
+
+[class^="face"] {
+  padding: 4px;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+/* Set styles for faces with 1 pip */
+
+.face-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Set styles for faces with 2 pips */
+
+.face-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.face-2 .pip:nth-of-type(2) {
+  align-self: flex-end;
+}
+
+/* Set styles for faces with 3 pips */
+
+.face-3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.face-3 .pip:nth-of-type(2) {
+  align-self: center;
+}
+
+.face-3 .pip:nth-of-type(3) {
+  align-self: flex-end;
+}
+
+/* Set styles for faces with 4 and 6 pips */
+
+.face-4,
+.face-6 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.face-4 .column,
+.face-6 .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Set styles for faces with 5 pips */
+
+.face-5 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.face-5 .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.face-5 .column:nth-of-type(2) {
+  justify-content: center;
+}
+
+/* Style the pip */
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+  background-color: white;
+}
