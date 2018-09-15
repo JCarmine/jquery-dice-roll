@@ -1,8 +1,11 @@
-$( document ).ready(function() {
+/* eslint-disable */
+
+$(document).ready(function() {
   // Bind click handler to button, call the getRandomNumber() function
   // with min and max numbers.
   // Display result in .rollDieResult el.
   // The call drawDie() with result.
+
   $('.rollDieButton').click(function() {
     const rollDieResult = getRandomNumber(1, 6);
     $('.rollDieResult').text(rollDieResult);
@@ -85,13 +88,9 @@ $( document ).ready(function() {
       case 5:
         for (let index = 0; index < 2; index++) {
           $column1.append(pip);
-        }
-        for (let index = 0; index < 1; index++) {
-          $column2.append(pip);
-        }
-        for (let index = 0; index < 2; index++) {
           $column3.append(pip);
         }
+        $column2.append(pip);
         $pipContainer.append($column1).append($column2).append($column3);
         break;
       case 6:
